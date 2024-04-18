@@ -86,35 +86,32 @@ exports.updateThisUser = async (req, res) => {
     }
   };
 
-async function sendEmailVerification(toEmail, emailToken) {
+  async function sendEmailVerification(toEmail, emailToken) {
     try {
         const transporter = nodemailer.createTransport({
-            host: "mail.privateemail.com",
-            secure: true,
-            port: 465,
-            auth: {
-                user: process.env.MYEMAIL,
-                pass: process.env.MYEMAIL_PASSWORD,
-            },
-            tls: {
-                rejectUnauthorized: false,
-            },
+          service: 'gmail',
+          auth: {
+            user: process.env.MYEMAIL,
+            pass: process.env.MYEMAIL_PASSWORD,
+          },
+          tls: {
+            rejectUnauthorized: false,
+          },
         });
-
+    
         const mailOptions = {
-            from: process.env.MYEMAIL,
-            to: toEmail,
-            subject: "Email Verification",
-            // text: "Testdasad"
-            text: ` Hey, \nPlease click the following link to verify your email:\n ${process.env.SERVER_ADDRESS}/users/verify/${emailToken}`,
+          from:  process.env.MYEMAIL,
+          to: toEmail,
+          subject: 'Email Verification',
+          text: `Hey, \nPlease click the following link to verify your email:\n ${process.env.SERVER_ADDRESS}/users/verify/${emailToken}`,
         };
-
+    
         const info = await transporter.sendMail(mailOptions);
-        console.log("Email verification sent:", info);
-    } catch (error) {
-        console.error("Email verification error:", error);
+        console.log('Email verification sent:', info);
+      } catch (error) {
+        console.error('Email verification error:', error);
+      }
     }
-}
 
 exports.Signin = async (req, res) => {
     try {
