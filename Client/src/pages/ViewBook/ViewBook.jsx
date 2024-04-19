@@ -90,7 +90,7 @@ function ViewBook() {
           onRequestClose={closeModal}
           style={customStyles}
         >
-          {portrait === "landscape" ? (
+
             <div className="PagesContainer">
               <button
                 className="pagesBTN"
@@ -104,12 +104,6 @@ function ViewBook() {
                 {<p className="BTNtext">{">"}</p>}
               </button>
             </div>
-          ) : (
-            <div className="Rotate">
-              <img id="Arrow" src={Arrow} alt="" />
-              <span> Please rotate your screen</span>
-            </div>
-          )}
 
           <button className="closeModalBTN" onClick={closeModal}>
             חזור
