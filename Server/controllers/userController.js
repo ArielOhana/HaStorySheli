@@ -166,7 +166,7 @@ exports.signout = async (req, res) => {
         res.cookie("token", "none", {
             httpOnly: true,
             maxAge: 1,
-            sameSite: "strict",
+            sameSite: "none",
         });
         res.status(200).send({
             status: true,
