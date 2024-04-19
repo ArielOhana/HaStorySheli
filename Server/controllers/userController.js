@@ -107,7 +107,6 @@ exports.updateThisUser = async (req, res) => {
         };
     
         const info = await transporter.sendMail(mailOptions);
-        console.log('Email verification sent:', info);
       } catch (error) {
         console.error('Email verification error:', error);
       }
@@ -183,25 +182,9 @@ exports.signout = async (req, res) => {
 };
 
 
-// exports.deleteById = async (req, res) => {
-//   try {
-//     const id = req.params.id;
-
-//     const result = await Users.deleteOne({ _id: id });
-
-//     if (result.deletedCount === 1) {
-//       return res.send("User deleted successfully.");
-//     } else {
-//       return res.send("User not found or not deleted.");
-//     }
-//   } catch (error) {
-//     console.error("Error deleting User:", error);
-//     res.status(500).send("Internal Server Error");
-//   }
-// };
-
 exports.verifyToken = async (req, res, next) => {
     const token = req.cookies.token;
+    console.log(token)
     if (!token) {
         return res
             .status(401)
@@ -289,7 +272,6 @@ exports.toggleLikedBook = async (req, res) => {
         }
         const userExists = await Users.exists({ _id: userId });
         const bookExists = await Books.exists({ _id: bookId });
-        console.log(userExists, bookExists);
         if (!userExists || !bookExists) {
             return res
                 .status(200)
