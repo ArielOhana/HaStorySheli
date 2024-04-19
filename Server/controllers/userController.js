@@ -134,7 +134,8 @@ exports.Signin = async (req, res) => {
                 res.cookie("token", token, {
                     httpOnly: true,
                     maxAge: 864000,
-                    sameSite: "strict",
+                    sameSite: "none",
+                    secure: true,
                 });
                 res.status(200).send({
                     status: true,
@@ -167,6 +168,7 @@ exports.signout = async (req, res) => {
             httpOnly: true,
             maxAge: 1,
             sameSite: "none",
+            secure: true,
         });
         res.status(200).send({
             status: true,
@@ -184,8 +186,7 @@ exports.signout = async (req, res) => {
 
 exports.verifyToken = async (req, res, next) => {
     const token = req.cookies.token;
-    console.log("Request headers:", req.headers);
-    console.log("Token:", token);
+    console.log()
     if (!token) {
         return res
             .status(401)
